@@ -16,6 +16,10 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+  res.send('home route!');
+});
+
 //MAIN PATH
 app.use('/auth', authRouter);
 

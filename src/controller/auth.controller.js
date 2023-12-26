@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 const createAdmin = async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { name, email, password } = req.body;
 
     const existingUser = await prisma.user.findUnique({
       where: {
@@ -19,15 +19,15 @@ const createAdmin = async (req, res) => {
       data: {
         name,
         email,
+        password,
       },
     });
+
     res
       .status(201)
       .json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ error: 'Error creating user', error });
-  } finally {
-    await prisma.$disconnect();
   }
 };
 
